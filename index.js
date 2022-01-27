@@ -65,40 +65,6 @@ msv.on("ready", () => {
   });
 });
 ///////////////////////////////////////////////////////////////////////////////
-msv.on("message", async message => {
-  if (message.content.startsWith(prefix + "help")) {
-    if (cooldown.has(message.author.id)) {
-      return message.channel.send(`You have to wait 5 seconds`).then(m => {
-        m.delete({ timeout: cdtime * 600 });
-      });
-    }
-    cooldown.add(message.author.id);
-    setTimeout(() => {
-      cooldown.delete(message.author.id);
-    }, cdtime * 1000);
-    let help = new Discord.MessageEmbed()
-      .setColor(msvcolor)
-      .setThumbnail(message.member.user.displayAvatarURL({ dynamic: true }))
-      .setDescription(`
-**Info Commands**
-\`${prefix}botinfo\` , \`${prefix}userinfo\` , \`${prefix}serverinfo\` , \`${prefix}invite\` , \`${prefix}owner\`
-
-**Moderation Commands**
-\`${prefix}lock\` , \`${prefix}unlock\` , \`${prefix}ban\` ,  \`${prefix}kick\` , \`${prefix}unban\`
-
-**Security Commands**
-\`${prefix}anti kick\` , \`${prefix}anti ban\` , \`${prefix}anti channelD\` , \`${prefix}anti channelC\` , 
-\`${prefix}anti roleD\` , \`${prefix}anti roleC\` , \`${prefix}anti bot\` 
-
-**Misc Commands**
-\`${prefix}settings\` , \`${prefix}punishment\`
-      
-      
-      `);
-    message.channel.send(help);
-  }
-});
-///////////////////////////////////////////////////////////////////////////////
 msv.on("message", message => {
   if (message.content === prefix + "rules") {
   if (cooldown.has(message.author.id)) {
